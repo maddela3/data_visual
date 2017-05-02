@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+    <style>
+        .axis path {
+            fill: none;
+            stroke: #777;
+            shape-rendering: crispEdges;
+        }
+        .axis text {
+            font-family: Lato;
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<center><h1>GISTEMP DATA</h1></center>
+<p>Description: This graph visualizes the GISTEMP data for the Globe and the North and </p>
+<p>South Hemispheres from 1880 to 2014. The blue line describes the data for the Northern</p>
+<p>Hemisphere, the orange for the South Hemisphere, and the green line is for the Globe.</p>
+
+<p>The resulting graph shows an increasing mean global temperature over the years.</p>
+    <div class="container">
+
+        <div class="jumbotron">
+
+            <svg id="visualisation" width="1000" height="500"></svg>
+            <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+            <script>
+                function InitChart() {
+                    var data = [	{"temp": "-19", "year": "1880"}, 
+									{"temp": "-10", "year": "1881"}, 
+									{"temp": "-09", "year": "1882"},
+									{"temp": "-19", "year": "1883"},
+									{"temp": "-27", "year": "1884"},
+									{"temp": "-31", "year": "1885"},
+									{"temp": "-30", "year": "1886"},
+									{"temp": "-33", "year": "1887"}, 
+									{"temp": "-20", "year": "1888"}, 
+									{"temp": "-11", "year": "1889"}, 
+									{"temp": "-36", "year": "1890"},
+									{"temp": "-23", "year": "1891"}, 
+									{"temp": "-26", "year": "1892"}, 
+									{"temp": "-29", "year": "1893"},
+									{"temp": "-30", "year": "1894"}, 
+									{"temp": "-21", "year": "1895"},
+									{"temp": "-14", "year": "1896"}, 
+									{"temp": "-11", "year": "1897"},
+									{"temp": "-28", "year": "1898"}, 
+									{"temp": "-16", "year": "1899"}, 
+									{"temp": "-08", "year": "1900"}, 
+									{"temp": "-13", "year": "1901"}, 
+									{"temp": "-26", "year": "1902"},
+									{"temp": "-35", "year": "1903"}, 
+									{"temp": "-44", "year": "1904"},
+									{"temp": "-27", "year": "1905"},
+									{"temp": "-21", "year": "1906"},
+									{"temp": "-39", "year": "1907"},
+									{"temp": "-42", "year": "1908"},
+									{"temp": "-47", "year": "1909"},
+									{"temp": "-42", "year": "1910"},
+									{"temp": "-44", "year": "1911"},
+									{"temp": "-35", "year": "1912"},
+									{"temp": "-33", "year": "1913"},
+									{"temp": "-15", "year": "1914"}, 
+									{"temp": "-10", "year": "1915"},
+									{"temp": "-33", "year": "1916"},
+									{"temp": "-39", "year": "1917"},
+									{"temp": "-24", "year": "1918"},
+									{"temp": "-21", "year": "1919"},
+									{"temp": "-25", "year": "1920"}, 
+									{"temp": "-19", "year": "1921"},
+									{"temp": "-26", "year": "1922"},
+									{"temp": "-22", "year": "1923"},
+									{"temp": "-26", "year": "1924"},
+									{"temp": "-19", "year": "1925"},
+									{"temp": "-08", "year": "1926"},
+									{"temp": "-20", "year": "1927"},
+									{"temp": "-20", "year": "1928"},
+									{"temp": "-35", "year": "1929"},
+									{"temp": "-13", "year": "1930"},
+									{"temp": "-09", "year": "1931"},
+									{"temp": "-16", "year": "1932"},
+									{"temp": "-28", "year": "1933"},
+									{"temp": "-13", "year": "1934"},
+									{"temp": "-19", "year": "1935"},
+									{"temp": "-14", "year": "1936"},
+									{"temp": "-01", "year": "1937"},
+									{"temp": "-02", "year": "1938"},
+									{"temp": "-03", "year": "1939"},
+									{"temp": "08", "year": "1940"},
+									{"temp": "13", "year": "1941"},
+									{"temp": "10", "year": "1942"},
+									{"temp": "14", "year": "1943"},
+									{"temp": "26", "year": "1944"},
+									{"temp": "13", "year": "1945"},
+									{"temp": "-03", "year": "1946"},
+									{"temp": "-03", "year": "1947"},
+									{"temp": "-09", "year": "1948"}, 
+									{"temp": "-09", "year": "1949"},
+									{"temp": "-18", "year": "1950"},
+									{"temp": "-07", "year": "1951"},
+									{"temp": "01", "year": "1952"},
+									{"temp": "08", "year": "1953"},
+									{"temp": "-12", "year": "1954"},
+									{"temp": "-14", "year": "1955"},
+									{"temp": "-20", "year": "1956"},
+									{"temp": "03", "year": "1957"},
+									{"temp": "06", "year": "1958"},
+									{"temp": "03", "year": "1959"},
+									{"temp": "-3", "year": "1960"},
+									{"temp": "05", "year": "1961"},
+									{"temp": "03", "year": "1962"},
+									{"temp": "06", "year": "1963"},
+									{"temp": "-20", "year": "1964"},
+									{"temp": "-10", "year": "1965"},
+									{"temp": "-5", "year": "1966"},
+									{"temp": "-2", "year": "1967"},
+									{"temp": "-7", "year": "1968"},
+									{"temp": "06", "year": "1969"},
+									{"temp": "03", "year": "1970"},
+									{"temp": "-9", "year": "1971"},
+									{"temp": "01", "year": "1972"},
+									{"temp": "15", "year": "1973"},
+									{"temp": "-8", "year": "1974"},
+									{"temp": "-1", "year": "1975"},
+									{"temp": "-11", "year": "1976"},
+									{"temp": "18", "year": "1977"},
+									{"temp": "07", "year": "1978"},
+									{"temp": "17", "year": "1979"},
+									{"temp": "28", "year": "1980"},
+									{"temp": "33", "year": "1981"},
+									{"temp": "13", "year": "1982"}, 
+									{"temp": "31", "year": "1983"}, 
+									{"temp": "16", "year": "1984"}, 
+									{"temp": "12", "year": "1985"}, 
+									{"temp": "19", "year": "1986"}, 
+									{"temp": "34", "year": "1987"}, 
+									{"temp": "40", "year": "1988"}, 
+									{"temp": "29", "year": "1989"}, 
+									{"temp": "44", "year": "1990"},
+									{"temp": "42", "year": "1991"}, 
+									{"temp": "23", "year": "1992"}, 
+									{"temp": "24", "year": "1993"}, 
+									{"temp": "32", "year": "1994"}, 
+									{"temp": "46", "year": "1995"}, 
+									{"temp": "35", "year": "1996"}, 
+									{"temp": "48", "year": "1997"}, 
+									{"temp": "63", "year": "1998"}, 
+									{"temp": "42", "year": "1999"}, 
+									{"temp": "42", "year": "2000"}, 
+									{"temp": "55", "year": "2001"}, 
+									{"temp": "63", "year": "2002"}, 
+									{"temp": "62", "year": "2003"}, 
+									{"temp": "55", "year": "2004"}, 
+									{"temp": "69", "year": "2005"}, 
+									{"temp": "64", "year": "2006"}, 
+									{"temp": "66", "year": "2007"}, 
+									{"temp": "54", "year": "2008"}, 
+									{"temp": "65", "year": "2009"}, 
+									{"temp": "71", "year": "2010"}, 
+									{"temp": "60", "year": "2011"}, 
+									{"temp": "63", "year": "2012"}, 
+									{"temp": "66", "year": "2013"}, 
+									{"temp": "75", "year": "2014"}	];
+					
+                    var data2 = [	{"temp": "-33", "year": "1880"}, 
+									{"temp": "-18", "year": "1881"}, 
+									{"temp": "-17", "year": "1882"},
+									{"temp": "-30", "year": "1883"},
+									{"temp": "-42", "year": "1884"},
+									{"temp": "-41", "year": "1885"},
+									{"temp": "-39", "year": "1886"},
+									{"temp": "-37", "year": "1887"}, 
+									{"temp": "-22", "year": "1888"}, 
+									{"temp": "-16", "year": "1889"}, 
+									{"temp": "-40", "year": "1890"},
+									{"temp": "-23", "year": "1891"}, 
+									{"temp": "-30", "year": "1892"}, 
+									{"temp": "-39", "year": "1893"},
+									{"temp": "-37", "year": "1894"}, 
+									{"temp": "-28", "year": "1895"},
+									{"temp": "-20", "year": "1896"}, 
+									{"temp": "-13", "year": "1897"},
+									{"temp": "-28", "year": "1898"}, 
+									{"temp": "-17", "year": "1899"}, 
+									{"temp": "-03", "year": "1900"}, 
+									{"temp": "-08", "year": "1901"}, 
+									{"temp": "-29", "year": "1902"},
+									{"temp": "-35", "year": "1903"}, 
+									{"temp": "-45", "year": "1904"},
+									{"temp": "-28", "year": "1905"},
+									{"temp": "-20", "year": "1906"},
+									{"temp": "-46", "year": "1907"},
+									{"temp": "-45", "year": "1908"},
+									{"temp": "-48", "year": "1909"},
+									{"temp": "-43", "year": "1910"},
+									{"temp": "-41", "year": "1911"},
+									{"temp": "-47", "year": "1912"},
+									{"temp": "-42", "year": "1913"},
+									{"temp": "-18", "year": "1914"}, 
+									{"temp": "-09", "year": "1915"},
+									{"temp": "-35", "year": "1916"},
+									{"temp": "-52", "year": "1917"},
+									{"temp": "-32", "year": "1918"},
+									{"temp": "-32", "year": "1919"},
+									{"temp": "-26", "year": "1920"}, 
+									{"temp": "-08", "year": "1921"},
+									{"temp": "-25", "year": "1922"},
+									{"temp": "-18", "year": "1923"},
+									{"temp": "-15", "year": "1924"},
+									{"temp": "-07", "year": "1925"},
+									{"temp": "04", "year": "1926"},
+									{"temp": "-10", "year": "1927"},
+									{"temp": "-07", "year": "1928"},
+									{"temp": "-30", "year": "1929"},
+									{"temp": "02", "year": "1930"},
+									{"temp": "05", "year": "1931"},
+									{"temp": "-03", "year": "1932"},
+									{"temp": "-24", "year": "1933"},
+									{"temp": "01", "year": "1934"},
+									{"temp": "-08", "year": "1935"},
+									{"temp": "-03", "year": "1936"},
+									{"temp": "13", "year": "1937"},
+									{"temp": "14", "year": "1938"},
+									{"temp": "07", "year": "1939"},
+									{"temp": "14", "year": "1940"},
+									{"temp": "16", "year": "1941"},
+									{"temp": "14", "year": "1942"},
+									{"temp": "21", "year": "1943"},
+									{"temp": "28", "year": "1944"},
+									{"temp": "09", "year": "1945"},
+									{"temp": "07", "year": "1946"},
+									{"temp": "05", "year": "1947"},
+									{"temp": "00", "year": "1948"}, 
+									{"temp": "-02", "year": "1949"},
+									{"temp": "-16", "year": "1950"},
+									{"temp": "05", "year": "1951"},
+									{"temp": "05", "year": "1952"},
+									{"temp": "22", "year": "1953"},
+									{"temp": "-04", "year": "1954"},
+									{"temp": "-09", "year": "1955"},
+									{"temp": "-25", "year": "1956"},
+									{"temp": "04", "year": "1957"},
+									{"temp": "16", "year": "1958"},
+									{"temp": "11", "year": "1959"},
+									{"temp": "08", "year": "1960"},
+									{"temp": "08", "year": "1961"},
+									{"temp": "14", "year": "1962"},
+									{"temp": "15", "year": "1963"},
+									{"temp": "-20", "year": "1964"},
+									{"temp": "-13", "year": "1965"},
+									{"temp": "00", "year": "1966"},
+									{"temp": "03", "year": "1967"},
+									{"temp": "-05", "year": "1968"},
+									{"temp": "-02", "year": "1969"},
+									{"temp": "-03", "year": "1970"},
+									{"temp": "-15", "year": "1971"},
+									{"temp": "-18", "year": "1972"},
+									{"temp": "10", "year": "1973"},
+									{"temp": "-19", "year": "1974"},
+									{"temp": "-05", "year": "1975"},
+									{"temp": "-21", "year": "1976"},
+									{"temp": "12", "year": "1977"},
+									{"temp": "02", "year": "1978"},
+									{"temp": "08", "year": "1979"},
+									{"temp": "16", "year": "1980"},
+									{"temp": "39", "year": "1981"},
+									{"temp": "06", "year": "1982"}, 
+									{"temp": "26", "year": "1983"}, 
+									{"temp": "05", "year": "1984"}, 
+									{"temp": "00", "year": "1985"}, 
+									{"temp": "14", "year": "1986"}, 
+									{"temp": "27", "year": "1987"}, 
+									{"temp": "37", "year": "1988"}, 
+									{"temp": "29", "year": "1989"}, 
+									{"temp": "51", "year": "1990"},
+									{"temp": "41", "year": "1991"}, 
+									{"temp": "12", "year": "1992"}, 
+									{"temp": "20", "year": "1993"}, 
+									{"temp": "36", "year": "1994"}, 
+									{"temp": "58", "year": "1995"}, 
+									{"temp": "28", "year": "1996"}, 
+									{"temp": "53", "year": "1997"}, 
+									{"temp": "73", "year": "1998"}, 
+									{"temp": "52", "year": "1999"}, 
+									{"temp": "51", "year": "2000"}, 
+									{"temp": "64", "year": "2001"}, 
+									{"temp": "71", "year": "2002"}, 
+									{"temp": "72", "year": "2003"}, 
+									{"temp": "67", "year": "2004"}, 
+									{"temp": "84", "year": "2005"}, 
+									{"temp": "80", "year": "2006"}, 
+									{"temp": "83", "year": "2007"}, 
+									{"temp": "66", "year": "2008"}, 
+									{"temp": "71", "year": "2009"}, 
+									{"temp": "88", "year": "2010"}, 
+									{"temp": "71", "year": "2011"}, 
+									{"temp": "77", "year": "2012"}, 
+									{"temp": "76", "year": "2013"}, 
+									{"temp": "91", "year": "2014"}	];
+									
+					var data3 = [	{"temp": "-05", "year": "1880"}, 
+									{"temp": "-02", "year": "1881"}, 
+									{"temp": "-01", "year": "1882"},
+									{"temp": "-08", "year": "1883"},
+									{"temp": "-12", "year": "1884"},
+									{"temp": "-21", "year": "1885"},
+									{"temp": "-21", "year": "1886"},
+									{"temp": "-28", "year": "1887"}, 
+									{"temp": "-17", "year": "1888"}, 
+									{"temp": "-06", "year": "1889"}, 
+									{"temp": "-33", "year": "1890"},
+									{"temp": "-24", "year": "1891"}, 
+									{"temp": "-21", "year": "1892"}, 
+									{"temp": "-19", "year": "1893"},
+									{"temp": "-23", "year": "1894"}, 
+									{"temp": "-14", "year": "1895"},
+									{"temp": "-08", "year": "1896"}, 
+									{"temp": "-09", "year": "1897"},
+									{"temp": "-29", "year": "1898"}, 
+									{"temp": "-15", "year": "1899"}, 
+									{"temp": "-13", "year": "1900"}, 
+									{"temp": "-19", "year": "1901"}, 
+									{"temp": "-23", "year": "1902"},
+									{"temp": "-35", "year": "1903"}, 
+									{"temp": "-42", "year": "1904"},
+									{"temp": "-26", "year": "1905"},
+									{"temp": "-23", "year": "1906"},
+									{"temp": "-31", "year": "1907"},
+									{"temp": "-39", "year": "1908"},
+									{"temp": "-46", "year": "1909"},
+									{"temp": "-41", "year": "1910"},
+									{"temp": "-47", "year": "1911"},
+									{"temp": "-22", "year": "1912"},
+									{"temp": "-25", "year": "1913"},
+									{"temp": "-13", "year": "1914"}, 
+									{"temp": "-11", "year": "1915"},
+									{"temp": "-30", "year": "1916"},
+									{"temp": "-26", "year": "1917"},
+									{"temp": "-17", "year": "1918"},
+									{"temp": "-10", "year": "1919"},
+									{"temp": "-24", "year": "1920"}, 
+									{"temp": "-31", "year": "1921"},
+									{"temp": "-27", "year": "1922"},
+									{"temp": "-27", "year": "1923"},
+									{"temp": "-38", "year": "1924"},
+									{"temp": "-30", "year": "1925"},
+									{"temp": "-21", "year": "1926"},
+									{"temp": "-29", "year": "1927"},
+									{"temp": "-33", "year": "1928"},
+									{"temp": "-40", "year": "1929"},
+									{"temp": "-29", "year": "1930"},
+									{"temp": "-23", "year": "1931"},
+									{"temp": "-30", "year": "1932"},
+									{"temp": "-31", "year": "1933"},
+									{"temp": "-27", "year": "1934"},
+									{"temp": "-29", "year": "1935"},
+									{"temp": "-26", "year": "1936"},
+									{"temp": "-16", "year": "1937"},
+									{"temp": "-18", "year": "1938"},
+									{"temp": "-13", "year": "1939"},
+									{"temp": "03", "year": "1940"},
+									{"temp": "10", "year": "1941"},
+									{"temp": "06", "year": "1942"},
+									{"temp": "07", "year": "1943"},
+									{"temp": "24", "year": "1944"},
+									{"temp": "16", "year": "1945"},
+									{"temp": "-12", "year": "1946"},
+									{"temp": "-12", "year": "1947"},
+									{"temp": "-18", "year": "1948"}, 
+									{"temp": "-16", "year": "1949"},
+									{"temp": "-19", "year": "1950"},
+									{"temp": "-18", "year": "1951"},
+									{"temp": "-03", "year": "1952"},
+									{"temp": "-06", "year": "1953"},
+									{"temp": "-20", "year": "1954"},
+									{"temp": "-19", "year": "1955"},
+									{"temp": "-14", "year": "1956"},
+									{"temp": "03", "year": "1957"},
+									{"temp": "-05", "year": "1958"},
+									{"temp": "-04", "year": "1959"},
+									{"temp": "-13", "year": "1960"},
+									{"temp": "03", "year": "1961"},
+									{"temp": "-09", "year": "1962"},
+									{"temp": "-03", "year": "1963"},
+									{"temp": "-21", "year": "1964"},
+									{"temp": "-07", "year": "1965"},
+									{"temp": "-10", "year": "1966"},
+									{"temp": "-08", "year": "1967"},
+									{"temp": "-09", "year": "1968"},
+									{"temp": "14", "year": "1969"},
+									{"temp": "09", "year": "1970"},
+									{"temp": "-3", "year": "1971"},
+									{"temp": "20", "year": "1972"},
+									{"temp": "20", "year": "1973"},
+									{"temp": "04", "year": "1974"},
+									{"temp": "02", "year": "1975"},
+									{"temp": "-02", "year": "1976"},
+									{"temp": "24", "year": "1977"},
+									{"temp": "12", "year": "1978"},
+									{"temp": "26", "year": "1979"},
+									{"temp": "39", "year": "1980"},
+									{"temp": "27", "year": "1981"},
+									{"temp": "21", "year": "1982"}, 
+									{"temp": "35", "year": "1983"}, 
+									{"temp": "27", "year": "1984"}, 
+									{"temp": "25", "year": "1985"}, 
+									{"temp": "25", "year": "1986"}, 
+									{"temp": "41", "year": "1987"}, 
+									{"temp": "43", "year": "1988"}, 
+									{"temp": "29", "year": "1989"}, 
+									{"temp": "36", "year": "1990"},
+									{"temp": "44", "year": "1991"}, 
+									{"temp": "33", "year": "1992"}, 
+									{"temp": "29", "year": "1993"}, 
+									{"temp": "27", "year": "1994"}, 
+									{"temp": "34", "year": "1995"}, 
+									{"temp": "42", "year": "1996"}, 
+									{"temp": "42", "year": "1997"}, 
+									{"temp": "54", "year": "1998"}, 
+									{"temp": "32", "year": "1999"}, 
+									{"temp": "33", "year": "2000"}, 
+									{"temp": "46", "year": "2001"}, 
+									{"temp": "56", "year": "2002"}, 
+									{"temp": "52", "year": "2003"}, 
+									{"temp": "42", "year": "2004"}, 
+									{"temp": "55", "year": "2005"}, 
+									{"temp": "47", "year": "2006"}, 
+									{"temp": "49", "year": "2007"}, 
+									{"temp": "42", "year": "2008"}, 
+									{"temp": "59", "year": "2009"}, 
+									{"temp": "55", "year": "2010"}, 
+									{"temp": "50", "year": "2011"}, 
+									{"temp": "50", "year": "2012"}, 
+									{"temp": "56", "year": "2013"}, 
+									{"temp": "58", "year": "2014"}];
+                    var vis = d3.select("#visualisation"),
+                        WIDTH = 900,
+                        HEIGHT = 500,
+                        MARGINS = {
+                            top: 30,
+                            right: 30,
+                            bottom: 30,
+                            left: 100
+                        },
+                        xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([1880, 2014]),
+                        yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([-60, 90]),
+                        xAxis = d3.svg.axis()
+                        .scale(xScale),
+                        yAxis = d3.svg.axis()
+                        .scale(yScale)
+                        .orient("left");
+					var fixedX=20;
+					var fixedY=260;
+                    vis.append('text')
+						.attr('x', fixedX)
+						.attr('y', fixedY)
+						.text('TEMP')
+					
+					var fixedX=480;
+					var fixedY=500;
+                    vis.append('text')
+						.attr('x', fixedX)
+						.attr('y', fixedY)
+						.text('YEAR')
+                    vis.append("svg:g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+                        .call(xAxis);
+                    vis.append("svg:g")
+                        .attr("class", "y axis")
+                        .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+                        .call(yAxis);
+                    var lineGen = d3.svg.line()
+                        .x(function(d) {
+                            return xScale(d.year);
+                        })
+                        .y(function(d) {
+                            return yScale(d.temp);
+                        })
+                        .interpolate("basis");
+                    vis.append('svg:path')
+                        .attr('d', lineGen(data))
+                        .attr('stroke', 'green')
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none');
+                    vis.append('svg:path')
+                        .attr('d', lineGen(data2))
+                        .attr('stroke', 'blue')
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none');
+					vis.append('svg:path')
+                        .attr('d', lineGen(data3))
+                        .attr('stroke', 'orange')
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none');
+						
+					
+                }
+                InitChart();
+            </script>
+        </div>
+
+    </div>.
+<center><h1>Written by: Michael M.</h1></center>
+</body>
+
+</html>
