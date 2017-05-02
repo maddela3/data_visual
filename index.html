@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+    <style>
+        .axis path {
+            fill: none;
+            stroke: #777;
+            shape-rendering: crispEdges;
+        }
+        .axis text {
+            font-family: Lato;
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<center><h1>Description</h1></center>
+<center><p>This graph visualizes the GISTEMP data for the Globe and the North and South Hemispheres</p></center>
+<center><p>from 1880 to 2014. The blue line describes the data for the Northern Hemisphere,</p></center>
+<center><p>the orange for the South Hemisphere, and the green line is for the Globe.</p></center>
+
+<center><p>The resulting graph shows an increasing mean global temperature over the years.</p></center>
+    //<div class="container">
+
+      //  <div class="jumbotron">
+
+            <svg id="visualisation" width="1000" height="500"></svg>
+            <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+            <script>
+                function InitChart() {
+                    var data = [	{"sale": "-19", "year": "1880"}, 
+									{"sale": "-10", "year": "1881"}, 
+									{"sale": "-09", "year": "1882"},
+									{"sale": "-19", "year": "1883"},
+									{"sale": "-27", "year": "1884"},
+									{"sale": "-31", "year": "1885"},
+									{"sale": "-30", "year": "1886"},
+									{"sale": "-33", "year": "1887"}, 
+									{"sale": "-20", "year": "1888"}, 
+									{"sale": "-11", "year": "1889"}, 
+									{"sale": "-36", "year": "1890"},
+									{"sale": "-23", "year": "1891"}, 
+									{"sale": "-26", "year": "1892"}, 
+									{"sale": "-29", "year": "1893"},
+									{"sale": "-30", "year": "1894"}, 
+									{"sale": "-21", "year": "1895"},
+									{"sale": "-14", "year": "1896"}, 
+									{"sale": "-11", "year": "1897"},
+									{"sale": "-28", "year": "1898"}, 
+									{"sale": "-16", "year": "1899"}, 
+									{"sale": "-08", "year": "1900"}, 
+									{"sale": "-13", "year": "1901"}, 
+									{"sale": "-26", "year": "1902"},
+									{"sale": "-35", "year": "1903"}, 
+									{"sale": "-44", "year": "1904"},
+									{"sale": "-27", "year": "1905"},
+									{"sale": "-21", "year": "1906"},
+									{"sale": "-39", "year": "1907"},
+									{"sale": "-42", "year": "1908"},
+									{"sale": "-47", "year": "1909"},
+									{"sale": "-42", "year": "1910"},
+									{"sale": "-44", "year": "1911"},
+									{"sale": "-35", "year": "1912"},
+									{"sale": "-33", "year": "1913"},
+									{"sale": "-15", "year": "1914"}, 
+									{"sale": "-10", "year": "1915"},
+									{"sale": "-33", "year": "1916"},
+									{"sale": "-39", "year": "1917"},
+									{"sale": "-24", "year": "1918"},
+									{"sale": "-21", "year": "1919"},
+									{"sale": "-25", "year": "1920"}, 
+									{"sale": "-19", "year": "1921"},
+									{"sale": "-26", "year": "1922"},
+									{"sale": "-22", "year": "1923"},
+									{"sale": "-26", "year": "1924"},
+									{"sale": "-19", "year": "1925"},
+									{"sale": "-08", "year": "1926"},
+									{"sale": "-20", "year": "1927"},
+									{"sale": "-20", "year": "1928"},
+									{"sale": "-35", "year": "1929"},
+									{"sale": "-13", "year": "1930"},
+									{"sale": "-09", "year": "1931"},
+									{"sale": "-16", "year": "1932"},
+									{"sale": "-28", "year": "1933"},
+									{"sale": "-13", "year": "1934"},
+									{"sale": "-19", "year": "1935"},
+									{"sale": "-14", "year": "1936"},
+									{"sale": "-01", "year": "1937"},
+									{"sale": "-02", "year": "1938"},
+									{"sale": "-03", "year": "1939"},
+									{"sale": "08", "year": "1940"},
+									{"sale": "13", "year": "1941"},
+									{"sale": "10", "year": "1942"},
+									{"sale": "14", "year": "1943"},
+									{"sale": "26", "year": "1944"},
+									{"sale": "13", "year": "1945"},
+									{"sale": "-03", "year": "1946"},
+									{"sale": "-03", "year": "1947"},
+									{"sale": "-09", "year": "1948"}, 
+									{"sale": "-09", "year": "1949"},
+									{"sale": "-18", "year": "1950"},
+									{"sale": "-07", "year": "1951"},
+									{"sale": "01", "year": "1952"},
+									{"sale": "08", "year": "1953"},
+									{"sale": "-12", "year": "1954"},
+									{"sale": "-14", "year": "1955"},
+									{"sale": "-20", "year": "1956"},
+									{"sale": "03", "year": "1957"},
+									{"sale": "06", "year": "1958"},
+									{"sale": "03", "year": "1959"},
+									{"sale": "-3", "year": "1960"},
+									{"sale": "05", "year": "1961"},
+									{"sale": "03", "year": "1962"},
+									{"sale": "06", "year": "1963"},
+									{"sale": "-20", "year": "1964"},
+									{"sale": "-10", "year": "1965"},
+									{"sale": "-5", "year": "1966"},
+									{"sale": "-2", "year": "1967"},
+									{"sale": "-7", "year": "1968"},
+									{"sale": "06", "year": "1969"},
+									{"sale": "03", "year": "1970"},
+									{"sale": "-9", "year": "1971"},
+									{"sale": "01", "year": "1972"},
+									{"sale": "15", "year": "1973"},
+									{"sale": "-8", "year": "1974"},
+									{"sale": "-1", "year": "1975"},
+									{"sale": "-11", "year": "1976"},
+									{"sale": "18", "year": "1977"},
+									{"sale": "07", "year": "1978"},
+									{"sale": "17", "year": "1979"},
+									{"sale": "28", "year": "1980"},
+									{"sale": "33", "year": "1981"},
+									{"sale": "13", "year": "1982"}, 
+									{"sale": "31", "year": "1983"}, 
+									{"sale": "16", "year": "1984"}, 
+									{"sale": "12", "year": "1985"}, 
+									{"sale": "19", "year": "1986"}, 
+									{"sale": "34", "year": "1987"}, 
+									{"sale": "40", "year": "1988"}, 
+									{"sale": "29", "year": "1989"}, 
+									{"sale": "44", "year": "1990"},
+									{"sale": "42", "year": "1991"}, 
+									{"sale": "23", "year": "1992"}, 
+									{"sale": "24", "year": "1993"}, 
+									{"sale": "32", "year": "1994"}, 
+									{"sale": "46", "year": "1995"}, 
+									{"sale": "35", "year": "1996"}, 
+									{"sale": "48", "year": "1997"}, 
+									{"sale": "63", "year": "1998"}, 
+									{"sale": "42", "year": "1999"}, 
+									{"sale": "42", "year": "2000"}, 
+									{"sale": "55", "year": "2001"}, 
+									{"sale": "63", "year": "2002"}, 
+									{"sale": "62", "year": "2003"}, 
+									{"sale": "55", "year": "2004"}, 
+									{"sale": "69", "year": "2005"}, 
+									{"sale": "64", "year": "2006"}, 
+									{"sale": "66", "year": "2007"}, 
+									{"sale": "54", "year": "2008"}, 
+									{"sale": "65", "year": "2009"}, 
+									{"sale": "71", "year": "2010"}, 
+									{"sale": "60", "year": "2011"}, 
+									{"sale": "63", "year": "2012"}, 
+									{"sale": "66", "year": "2013"}, 
+									{"sale": "75", "year": "2014"}	];
+					
+                    var data2 = [	{"sale": "-33", "year": "1880"}, 
+									{"sale": "-18", "year": "1881"}, 
+									{"sale": "-17", "year": "1882"},
+									{"sale": "-30", "year": "1883"},
+									{"sale": "-42", "year": "1884"},
+									{"sale": "-41", "year": "1885"},
+									{"sale": "-39", "year": "1886"},
+									{"sale": "-37", "year": "1887"}, 
+									{"sale": "-22", "year": "1888"}, 
+									{"sale": "-16", "year": "1889"}, 
+									{"sale": "-40", "year": "1890"},
+									{"sale": "-23", "year": "1891"}, 
+									{"sale": "-30", "year": "1892"}, 
+									{"sale": "-39", "year": "1893"},
+									{"sale": "-37", "year": "1894"}, 
+									{"sale": "-28", "year": "1895"},
+									{"sale": "-20", "year": "1896"}, 
+									{"sale": "-13", "year": "1897"},
+									{"sale": "-28", "year": "1898"}, 
+									{"sale": "-17", "year": "1899"}, 
+									{"sale": "-03", "year": "1900"}, 
+									{"sale": "-08", "year": "1901"}, 
+									{"sale": "-29", "year": "1902"},
+									{"sale": "-35", "year": "1903"}, 
+									{"sale": "-45", "year": "1904"},
+									{"sale": "-28", "year": "1905"},
+									{"sale": "-20", "year": "1906"},
+									{"sale": "-46", "year": "1907"},
+									{"sale": "-45", "year": "1908"},
+									{"sale": "-48", "year": "1909"},
+									{"sale": "-43", "year": "1910"},
+									{"sale": "-41", "year": "1911"},
+									{"sale": "-47", "year": "1912"},
+									{"sale": "-42", "year": "1913"},
+									{"sale": "-18", "year": "1914"}, 
+									{"sale": "-09", "year": "1915"},
+									{"sale": "-35", "year": "1916"},
+									{"sale": "-52", "year": "1917"},
+									{"sale": "-32", "year": "1918"},
+									{"sale": "-32", "year": "1919"},
+									{"sale": "-26", "year": "1920"}, 
+									{"sale": "-08", "year": "1921"},
+									{"sale": "-25", "year": "1922"},
+									{"sale": "-18", "year": "1923"},
+									{"sale": "-15", "year": "1924"},
+									{"sale": "-07", "year": "1925"},
+									{"sale": "04", "year": "1926"},
+									{"sale": "-10", "year": "1927"},
+									{"sale": "-07", "year": "1928"},
+									{"sale": "-30", "year": "1929"},
+									{"sale": "02", "year": "1930"},
+									{"sale": "05", "year": "1931"},
+									{"sale": "-03", "year": "1932"},
+									{"sale": "-24", "year": "1933"},
+									{"sale": "01", "year": "1934"},
+									{"sale": "-08", "year": "1935"},
+									{"sale": "-03", "year": "1936"},
+									{"sale": "13", "year": "1937"},
+									{"sale": "14", "year": "1938"},
+									{"sale": "07", "year": "1939"},
+									{"sale": "14", "year": "1940"},
+									{"sale": "16", "year": "1941"},
+									{"sale": "14", "year": "1942"},
+									{"sale": "21", "year": "1943"},
+									{"sale": "28", "year": "1944"},
+									{"sale": "09", "year": "1945"},
+									{"sale": "07", "year": "1946"},
+									{"sale": "05", "year": "1947"},
+									{"sale": "00", "year": "1948"}, 
+									{"sale": "-02", "year": "1949"},
+									{"sale": "-16", "year": "1950"},
+									{"sale": "05", "year": "1951"},
+									{"sale": "05", "year": "1952"},
+									{"sale": "22", "year": "1953"},
+									{"sale": "-04", "year": "1954"},
+									{"sale": "-09", "year": "1955"},
+									{"sale": "-25", "year": "1956"},
+									{"sale": "04", "year": "1957"},
+									{"sale": "16", "year": "1958"},
+									{"sale": "11", "year": "1959"},
+									{"sale": "08", "year": "1960"},
+									{"sale": "08", "year": "1961"},
+									{"sale": "14", "year": "1962"},
+									{"sale": "15", "year": "1963"},
+									{"sale": "-20", "year": "1964"},
+									{"sale": "-13", "year": "1965"},
+									{"sale": "00", "year": "1966"},
+									{"sale": "03", "year": "1967"},
+									{"sale": "-05", "year": "1968"},
+									{"sale": "-02", "year": "1969"},
+									{"sale": "-03", "year": "1970"},
+									{"sale": "-15", "year": "1971"},
+									{"sale": "-18", "year": "1972"},
+									{"sale": "10", "year": "1973"},
+									{"sale": "-19", "year": "1974"},
+									{"sale": "-05", "year": "1975"},
+									{"sale": "-21", "year": "1976"},
+									{"sale": "12", "year": "1977"},
+									{"sale": "02", "year": "1978"},
+									{"sale": "08", "year": "1979"},
+									{"sale": "16", "year": "1980"},
+									{"sale": "39", "year": "1981"},
+									{"sale": "06", "year": "1982"}, 
+									{"sale": "26", "year": "1983"}, 
+									{"sale": "05", "year": "1984"}, 
+									{"sale": "00", "year": "1985"}, 
+									{"sale": "14", "year": "1986"}, 
+									{"sale": "27", "year": "1987"}, 
+									{"sale": "37", "year": "1988"}, 
+									{"sale": "29", "year": "1989"}, 
+									{"sale": "51", "year": "1990"},
+									{"sale": "41", "year": "1991"}, 
+									{"sale": "12", "year": "1992"}, 
+									{"sale": "20", "year": "1993"}, 
+									{"sale": "36", "year": "1994"}, 
+									{"sale": "58", "year": "1995"}, 
+									{"sale": "28", "year": "1996"}, 
+									{"sale": "53", "year": "1997"}, 
+									{"sale": "73", "year": "1998"}, 
+									{"sale": "52", "year": "1999"}, 
+									{"sale": "51", "year": "2000"}, 
+									{"sale": "64", "year": "2001"}, 
+									{"sale": "71", "year": "2002"}, 
+									{"sale": "72", "year": "2003"}, 
+									{"sale": "67", "year": "2004"}, 
+									{"sale": "84", "year": "2005"}, 
+									{"sale": "80", "year": "2006"}, 
+									{"sale": "83", "year": "2007"}, 
+									{"sale": "66", "year": "2008"}, 
+									{"sale": "71", "year": "2009"}, 
+									{"sale": "88", "year": "2010"}, 
+									{"sale": "71", "year": "2011"}, 
+									{"sale": "77", "year": "2012"}, 
+									{"sale": "76", "year": "2013"}, 
+									{"sale": "91", "year": "2014"}	];
+									
+					var data3 = [	{"sale": "-05", "year": "1880"}, 
+									{"sale": "-02", "year": "1881"}, 
+									{"sale": "-01", "year": "1882"},
+									{"sale": "-08", "year": "1883"},
+									{"sale": "-12", "year": "1884"},
+									{"sale": "-21", "year": "1885"},
+									{"sale": "-21", "year": "1886"},
+									{"sale": "-28", "year": "1887"}, 
+									{"sale": "-17", "year": "1888"}, 
+									{"sale": "-06", "year": "1889"}, 
+									{"sale": "-33", "year": "1890"},
+									{"sale": "-24", "year": "1891"}, 
+									{"sale": "-21", "year": "1892"}, 
+									{"sale": "-19", "year": "1893"},
+									{"sale": "-23", "year": "1894"}, 
+									{"sale": "-14", "year": "1895"},
+									{"sale": "-08", "year": "1896"}, 
+									{"sale": "-09", "year": "1897"},
+									{"sale": "-29", "year": "1898"}, 
+									{"sale": "-15", "year": "1899"}, 
+									{"sale": "-13", "year": "1900"}, 
+									{"sale": "-19", "year": "1901"}, 
+									{"sale": "-23", "year": "1902"},
+									{"sale": "-35", "year": "1903"}, 
+									{"sale": "-42", "year": "1904"},
+									{"sale": "-26", "year": "1905"},
+									{"sale": "-23", "year": "1906"},
+									{"sale": "-31", "year": "1907"},
+									{"sale": "-39", "year": "1908"},
+									{"sale": "-46", "year": "1909"},
+									{"sale": "-41", "year": "1910"},
+									{"sale": "-47", "year": "1911"},
+									{"sale": "-22", "year": "1912"},
+									{"sale": "-25", "year": "1913"},
+									{"sale": "-13", "year": "1914"}, 
+									{"sale": "-11", "year": "1915"},
+									{"sale": "-30", "year": "1916"},
+									{"sale": "-26", "year": "1917"},
+									{"sale": "-17", "year": "1918"},
+									{"sale": "-10", "year": "1919"},
+									{"sale": "-24", "year": "1920"}, 
+									{"sale": "-31", "year": "1921"},
+									{"sale": "-27", "year": "1922"},
+									{"sale": "-27", "year": "1923"},
+									{"sale": "-38", "year": "1924"},
+									{"sale": "-30", "year": "1925"},
+									{"sale": "-21", "year": "1926"},
+									{"sale": "-29", "year": "1927"},
+									{"sale": "-33", "year": "1928"},
+									{"sale": "-40", "year": "1929"},
+									{"sale": "-29", "year": "1930"},
+									{"sale": "-23", "year": "1931"},
+									{"sale": "-30", "year": "1932"},
+									{"sale": "-31", "year": "1933"},
+									{"sale": "-27", "year": "1934"},
+									{"sale": "-29", "year": "1935"},
+									{"sale": "-26", "year": "1936"},
+									{"sale": "-16", "year": "1937"},
+									{"sale": "-18", "year": "1938"},
+									{"sale": "-13", "year": "1939"},
+									{"sale": "03", "year": "1940"},
+									{"sale": "10", "year": "1941"},
+									{"sale": "06", "year": "1942"},
+									{"sale": "07", "year": "1943"},
+									{"sale": "24", "year": "1944"},
+									{"sale": "16", "year": "1945"},
+									{"sale": "-12", "year": "1946"},
+									{"sale": "-12", "year": "1947"},
+									{"sale": "-18", "year": "1948"}, 
+									{"sale": "-16", "year": "1949"},
+									{"sale": "-19", "year": "1950"},
+									{"sale": "-18", "year": "1951"},
+									{"sale": "-03", "year": "1952"},
+									{"sale": "-06", "year": "1953"},
+									{"sale": "-20", "year": "1954"},
+									{"sale": "-19", "year": "1955"},
+									{"sale": "-14", "year": "1956"},
+									{"sale": "03", "year": "1957"},
+									{"sale": "-05", "year": "1958"},
+									{"sale": "-04", "year": "1959"},
+									{"sale": "-13", "year": "1960"},
+									{"sale": "03", "year": "1961"},
+									{"sale": "-09", "year": "1962"},
+									{"sale": "-03", "year": "1963"},
+									{"sale": "-21", "year": "1964"},
+									{"sale": "-07", "year": "1965"},
+									{"sale": "-10", "year": "1966"},
+									{"sale": "-08", "year": "1967"},
+									{"sale": "-09", "year": "1968"},
+									{"sale": "14", "year": "1969"},
+									{"sale": "09", "year": "1970"},
+									{"sale": "-3", "year": "1971"},
+									{"sale": "20", "year": "1972"},
+									{"sale": "20", "year": "1973"},
+									{"sale": "04", "year": "1974"},
+									{"sale": "02", "year": "1975"},
+									{"sale": "-02", "year": "1976"},
+									{"sale": "24", "year": "1977"},
+									{"sale": "12", "year": "1978"},
+									{"sale": "26", "year": "1979"},
+									{"sale": "39", "year": "1980"},
+									{"sale": "27", "year": "1981"},
+									{"sale": "21", "year": "1982"}, 
+									{"sale": "35", "year": "1983"}, 
+									{"sale": "27", "year": "1984"}, 
+									{"sale": "25", "year": "1985"}, 
+									{"sale": "25", "year": "1986"}, 
+									{"sale": "41", "year": "1987"}, 
+									{"sale": "43", "year": "1988"}, 
+									{"sale": "29", "year": "1989"}, 
+									{"sale": "36", "year": "1990"},
+									{"sale": "44", "year": "1991"}, 
+									{"sale": "33", "year": "1992"}, 
+									{"sale": "29", "year": "1993"}, 
+									{"sale": "27", "year": "1994"}, 
+									{"sale": "34", "year": "1995"}, 
+									{"sale": "42", "year": "1996"}, 
+									{"sale": "42", "year": "1997"}, 
+									{"sale": "54", "year": "1998"}, 
+									{"sale": "32", "year": "1999"}, 
+									{"sale": "33", "year": "2000"}, 
+									{"sale": "46", "year": "2001"}, 
+									{"sale": "56", "year": "2002"}, 
+									{"sale": "52", "year": "2003"}, 
+									{"sale": "42", "year": "2004"}, 
+									{"sale": "55", "year": "2005"}, 
+									{"sale": "47", "year": "2006"}, 
+									{"sale": "49", "year": "2007"}, 
+									{"sale": "42", "year": "2008"}, 
+									{"sale": "59", "year": "2009"}, 
+									{"sale": "55", "year": "2010"}, 
+									{"sale": "50", "year": "2011"}, 
+									{"sale": "50", "year": "2012"}, 
+									{"sale": "56", "year": "2013"}, 
+									{"sale": "58", "year": "2014"}];
+                    var vis = d3.select("#visualisation"),
+                        WIDTH = 900,
+                        HEIGHT = 500,
+                        MARGINS = {
+                            top: 30,
+                            right: 30,
+                            bottom: 30,
+                            left: 100
+                        },
+                        xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([1880, 2014]),
+                        yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([-60, 90]),
+                        xAxis = d3.svg.axis()
+                        .scale(xScale),
+                        yAxis = d3.svg.axis()
+                        .scale(yScale)
+                        .orient("left");
+					var fixedX=20;
+					var fixedY=260;
+                    vis.append('text')
+						.attr('x', fixedX)
+						.attr('y', fixedY)
+						//.attr("transform", "rotate(-90)")
+						.text('TEMP')
+					
+					var fixedX=480;
+					var fixedY=500;
+                    vis.append('text')
+						.attr('x', fixedX)
+						.attr('y', fixedY)
+						//.attr("transform", "rotate(-90)")
+						.text('YEAR')
+                    vis.append("svg:g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+                        .call(xAxis);
+                    vis.append("svg:g")
+                        .attr("class", "y axis")
+                        .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+                        .call(yAxis);
+                    var lineGen = d3.svg.line()
+                        .x(function(d) {
+                            return xScale(d.year);
+                        })
+                        .y(function(d) {
+                            return yScale(d.sale);
+                        })
+                        .interpolate("basis");
+                    vis.append('svg:path')
+                        .attr('d', lineGen(data))
+                        .attr('stroke', 'green')
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none');
+                    vis.append('svg:path')
+                        .attr('d', lineGen(data2))
+                        .attr('stroke', 'blue')
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none');
+					vis.append('svg:path')
+                        .attr('d', lineGen(data3))
+                        .attr('stroke', 'orange')
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none');
+						
+					
+                }
+                InitChart();
+            </script>
+       // </div>
+
+    //</div>.
+<center><h1>Written by: Michael M.</h1></center>
+</body>
+
+</html>
